@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ruleset name="Custom Standard">
+  <rule ref="PSR2"/>
+  <!-- Add custom rules or tweak PSR-2 here -->
+  <rule ref="Generic.Files.LineLength">
+    <properties>
+      <property name="lineLimit" value="150"/>
+      <property name="absoluteLineLimit" value="0"/>
+    </properties>
+    <exclude-pattern>**/*/Configuration/TCA/*.php</exclude-pattern>
+  </rule>
+</ruleset>

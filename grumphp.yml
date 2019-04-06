@@ -1,0 +1,76 @@
+parameters:
+  git_dir: .
+  bin_dir: ".Build/bin"
+  package_dir: ".Build/vendor/andreaskiessling/grumphp-conventions-typo3"
+
+  ascii: ~
+  process_timeout: "%convention.process_timeout%"
+  convention.process_timeout: 60
+  convention.xmllint_ignore_pattern: []
+  convention.yamllint_ignore_pattern: []
+  convention.jsonlint_ignore_pattern:
+    - "Resources/Public/JavaScript/Libraries/"
+
+  convention.phpmd_ruleset: "%package_dir%/phpmd.xml"
+  convention.phpcs_standard: "%package_dir%/phpcs.xml"
+  convention.phpcs_slevomat_directories: "Classes"
+  convention.phpcpd_ignore_pattern:
+    - ".Build"
+    - "tmp-phpqa"
+    - "Configuration/TCA"
+  convention.phpstan_ignore_pattern:
+    - "ext_emconf.php"
+    - "tmp-phpqa/*"
+
+  convention.phpcslint_ignore_pattern:
+    - ext_emconf.php
+    - ext_localconf.php
+    - ext_tables.php
+
+  tasks:
+    phpmnd: ~
+    phpstan:
+      ignore_patterns: "%convention.phpstan_ignore_pattern%"
+    phpcpd:
+      exclude: "%convention.phpcpd_ignore_pattern%"
+    phpmd:
+      ruleset:
+        - "%convention.phpmd_ruleset%"
+    git_blacklist:
+      keywords:
+        - "var_dump("
+        - "console.log("
+        - "print_r("
+        - "exit;"
+        - "exit("
+        - "die("
+        - "die;"
+        - "fileadmin"
+        - "DebuggerUtility"
+      whitelist_patterns:
+        - /^Classes\/(.*)/
+      triggered_by: [php, js, html]
+      metadata:
+        blocking: false #show only as warnings
+    jsonlint:
+      ignore_patterns: "%convention.jsonlint_ignore_pattern%"
+      detect_key_conflicts: true
+    phpcs:
+      ignore_patterns: "%convention.phpcslint_ignore_pattern%"
+      tab_width: 4
+      standard: "%convention.phpcs_standard%"
+    shell:
+      scripts:
+        - ["-c", "%bin_dir%/phpcs -p --standard=%package_dir%/phpcs-slevomat.xml %convention.phpcs_slevomat_directories%"]
+    phplint: ~
+    xmllint:
+      ignore_patterns: "%convention.xmllint_ignore_pattern%"
+    yamllint:
+      ignore_patterns: "%convention.yamllint_ignore_pattern%"
+    securitychecker: ~
+
+
+  testsuites:
+    phpcs:
+      tasks:
+        - shell
