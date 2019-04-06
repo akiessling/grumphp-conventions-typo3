@@ -4,6 +4,13 @@ Provides a preconfigured grumphp setup for TYPO3 extensions that i write.
 
 # Usage
 
+## Install
+
+~~~
+composer config repositories.grumphp-conventions-typo3 vcs https://github.com/akiessling/grumphp-conventions-typo3.git
+composer require --dev andreaskiessling/grumphp-conventions-typo3 dev-master
+~~~
+
 ## Setup composer configuration
 
 The configuration currently expects the package in some specific directories. Run these lines to setup composer accordingly. This will only take effect, if you run composer from the extension, not from your project and should thus be safe to use.
