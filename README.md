@@ -9,7 +9,7 @@ Provides a preconfigured grumphp setup for TYPO3 extensions that i write.
 The configuration currently expects the package in some specific directories. Run these lines to setup composer accordingly. This will only take effect, if you run composer from the extension, not from your project and should thus be safe to use.
 
 ~~~shell
-touch .gitignore && echo .Build >> .gitignore && echo composer.lock >> .gitignore
+git ignore .Build composer.lock
 composer config vendor-dir .Build/vendor
 composer config bin-dir .Build/bin
 composer config extra.typo3/cms.cms-package-dir "{\$vendor-dir}/typo3/cms"
