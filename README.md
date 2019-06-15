@@ -30,6 +30,10 @@ Create a grumphp.yml in your extension directory and insert this content:
 imports:
   - { resource: .Build/vendor/andreaskiessling/grumphp-conventions-typo3/grumphp.yml }
 ~~~
+or symlink it from this package
+~~~bash
+ln -s .Build/vendor/andreaskiessling/grumphp-conventions-typo3/grumphp.yml .
+~~~
 
 ## Running it
 
