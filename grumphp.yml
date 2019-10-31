@@ -65,6 +65,7 @@ parameters:
     phplint: ~
     xmllint:
       ignore_patterns: "%convention.xmllint_ignore_pattern%"
+      triggered_by: ['xml', 'xlf']
     yamllint:
       ignore_patterns: "%convention.yamllint_ignore_pattern%"
     securitychecker: ~
