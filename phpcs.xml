@@ -10,7 +10,83 @@
     </properties>
     <exclude-pattern>**/*/Configuration/TCA/*.php</exclude-pattern>
   </rule>
-  
+
+  <!-- Force array element indentation with 4 spaces -->
+  <rule ref="Generic.Arrays.ArrayIndent"/>
+  <!-- Forbid `array(...)` -->
+  <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+  <!-- Forbid duplicate classes -->
+  <rule ref="Generic.Classes.DuplicateClassName"/>
+  <!-- Forbid empty statements -->
+  <rule ref="Generic.CodeAnalysis.EmptyStatement">
+    <!-- But allow empty catch -->
+    <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedCatch"/>
+  </rule>
+  <!-- Forbid final methods in final classes -->
+  <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
+  <!-- Forbid useless empty method overrides -->
+  <rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
+  <!-- Forbid inline HTML in PHP code -->
+  <rule ref="Generic.Files.InlineHTML"/>
+  <!-- Forbid PHP 4 constructors -->
+  <rule ref="Generic.NamingConventions.ConstructorName"/>
+  <!-- Forbid any content before opening tag -->
+  <rule ref="Generic.PHP.CharacterBeforePHPOpeningTag"/>
+  <!-- Forbid deprecated functions -->
+  <rule ref="Generic.PHP.DeprecatedFunctions"/>
+
+  <!-- Forbid alias functions, i.e. `sizeof()`, `delete()` -->
+  <rule ref="Generic.PHP.ForbiddenFunctions">
+    <properties>
+      <property
+          name="forbiddenFunctions"
+          type="array"
+          value="
+                    chop => rtrim,
+                    close => closedir,
+                    compact => null,
+                    delete => unset,
+                    doubleval => floatval,
+                    extract => null,
+                    fputs => fwrite,
+                    ini_alter => ini_set,
+                    is_double => is_float,
+                    is_integer => is_int,
+                    is_long => is_int,
+                    is_null => null,
+                    is_real => is_float,
+                    is_writeable => is_writable,
+                    join => implode,
+                    key_exists => array_key_exists,
+                    pos => current,
+                    settype => null,
+                    show_source => highlight_file,
+                    sizeof => count,
+                    strchr => strstr,
+                    var_dump => null,
+                    var_export => null
+                "/>
+    </properties>
+  </rule>
+  <!-- Forbid useless inline string concatenation -->
+  <rule ref="Generic.Strings.UnnecessaryStringConcat">
+    <!-- But multiline is useful for readability -->
+    <properties>
+      <property name="allowMultiline" value="true"/>
+    </properties>
+  </rule>
+  <!-- Forbid backtick operator -->
+  <rule ref="Generic.PHP.BacktickOperator"/>
+  <!-- Forbid `php_sapi_name()` function -->
+  <rule ref="Generic.PHP.SAPIUsage"/>
+  <!-- Forbid comments starting with # -->
+  <rule ref="PEAR.Commenting.InlineComment"/>
+  <!-- Disallow else if in favor of elseif -->
+  <rule ref="PSR2.ControlStructures.ElseIfDeclaration.NotAllowed">
+    <type>error</type>
+  </rule>
+
+
   <rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint"/>
   <rule ref="SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly"/>
   <rule ref="SlevomatCodingStandard.Exceptions.DeadCatch"/>
@@ -63,23 +139,41 @@
   <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation"/>
   <rule ref="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn"/>
   <rule ref="SlevomatCodingStandard.ControlStructures.UselessTernaryOperator"/>
-  <rule ref="SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses" />
+  <rule ref="SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses"/>
   <!--  should be in next release-->
   <!--  <rule ref="SlevomatCodingStandard.PHP.DisallowReference" />-->
 
   <!-- only from php 7.1 upwards -->
-  <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility" />
-  <rule ref="SlevomatCodingStandard.Commenting.ForbiddenAnnotations"/>
-  <rule ref="SlevomatCodingStandard.Commenting.ForbiddenComments">
+  <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility"/>
+  <rule ref="SlevomatCodingStandard.Commenting.ForbiddenAnnotations">
     <properties>
       <property
-          name="forbiddenCommentPatterns"
+          name="forbiddenAnnotations"
           type="array"
           value="
-                    ~^(?:(?!private|protected|static)\S+ )?(?:con|de)structor\.\z~i,
-                    ~^Created by \S+\.\z~i,
-                    ~^\S+ [gs]etter\.\z~i,
-                " />
+                    @api,
+                    @author,
+                    @category,
+                    @copyright,
+                    @created,
+                    @license,
+                    @package,
+                    @since,
+                    @subpackage,
+                    @version
+                "
+      />
+    </properties>
+  </rule>
+  <rule ref="SlevomatCodingStandard.Commenting.ForbiddenComments">
+    <properties>
+      <property name="forbiddenCommentPatterns" type="array">
+        <element value="~^(?:(?!private|protected|static)\S+ )?(?:con|de)structor\.\z~i"/>
+        <element value="~^Created by .+\.\z~i"/>
+        <element value="~^(User|Date|Time): \S+\z~i"/>
+        <element value="~^\S+ [gs]etter\.\z~i"/>
+        <element value="~^Class \S+\z~i"/>
+      </property>
     </properties>
   </rule>
 </ruleset>
