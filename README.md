@@ -40,11 +40,3 @@ ln -s .Build/vendor/andreaskiessling/grumphp-conventions-typo3/grumphp.yml .
 ~~~shell
 .Build/bin/grumphp run
 ~~~
-
-# Fixing errors reported from slevomat checks:
-
-I could not get the checks to run via phpcs directly due to some autoloading issues, thus they are currently executed through a shell task. To fix the issues, run phpcbf with the given standard:
-
-~~~
-`composer config bin-dir`/phpcbf -p --standard=`composer config vendor-dir`/andreaskiessling/grumphp-conventions-typo3/phpcs-slevomat.xml --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1  Classes
-~~~
