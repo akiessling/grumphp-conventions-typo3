@@ -59,9 +59,6 @@ parameters:
       ignore_patterns: "%convention.phpcslint_ignore_pattern%"
       tab_width: 4
       standard: "%convention.phpcs_standard%"
-    shell:
-      scripts:
-        - ["-c", "%bin_dir%/phpcs -p --standard=%package_dir%/phpcs-slevomat.xml %convention.phpcs_slevomat_directories%"]
     phplint: ~
     xmllint:
       ignore_patterns: "%convention.xmllint_ignore_pattern%"
