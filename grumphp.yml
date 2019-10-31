@@ -65,13 +65,26 @@ parameters:
     phplint: ~
     xmllint:
       ignore_patterns: "%convention.xmllint_ignore_pattern%"
-      triggered_by: ['xml', 'xlf']
+      triggered_by: ['xml']
+    xlifflint:
+      ignore_patterns: []
+      load_from_net: false
+      x_include: false
+      dtd_validation: false
+      scheme_validation: false
+      triggered_by: ['xlf']
     yamllint:
       ignore_patterns: "%convention.yamllint_ignore_pattern%"
     securitychecker: ~
 
+  extensions:
+    - PLUS\GrumPHPXliffTask\ExtensionLoader
 
   testsuites:
     phpcs:
       tasks:
         - shell
+    xml:
+      tasks:
+        - xmllint
+        - xlifflint

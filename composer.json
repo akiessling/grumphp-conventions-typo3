@@ -23,6 +23,7 @@
         "vimeo/psalm": "^3.0",
         "phpro/grumphp": "^0.16.2",
         "squizlabs/php_codesniffer": "^3.3",
-        "slevomat/coding-standard": "^5.0"
+        "slevomat/coding-standard": "^5.0",
+        "pluswerk/grumphp-xliff-task": "^3.0"
     }
 }
