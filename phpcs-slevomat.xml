@@ -53,5 +53,10 @@
   <rule ref="./.Build/vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/FullyQualifiedClassNameInAnnotationSniff.php"/>
   <rule ref="./.Build/vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/UselessIfConditionWithReturnSniff.php"/>
   <rule ref="./.Build/vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/UselessTernaryOperatorSniff.php"/>
-  <rule ref="./.Build/vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/DeclareStrictTypesSniff.php" />
+  <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+    <properties>
+      <property name="newlinesCountBetweenOpenTagAndDeclare" value="1"/>
+      <property name="spacesCountAroundEqualsSign" value="1" />
+    </properties>
+  </rule>
 </ruleset>
